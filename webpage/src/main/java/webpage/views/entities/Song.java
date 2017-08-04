@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OrderBy;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Song {
@@ -20,7 +21,8 @@ public class Song {
 	//@SequenceGenerator(name = "SONG_S", sequenceName = "SONG_S",allocationSize=1)
 	private long cod;
 	@OrderBy
-	@Column(nullable=false,length=256)
+	@NotNull
+	@Column(nullable=false,length=256,unique=true)
 	private String title;
 	@Column(nullable=true,length=256)
 	private String albumName;
@@ -28,16 +30,13 @@ public class Song {
 	private String artistName;
 	@Column(nullable=true,length=256)
 	private String genre;
+	@NotNull
 	@Column(nullable=false,precision=5, scale=0)
-	private int duration;
+	private Integer duration;
 	@Column(nullable=true)
 	private Date year;
-
-//	@ManyToOne(targetEntity = (User.class))
-//	@JoinColumn(name = "COD", insertable = false, updatable = false)
-//	//@Column(nullable=false,precision=10, scale=0)
-//	private User owner;
-	
+	@Column(nullable=false)
+	private long owner;
 	/**
 	 * @return the cod
 	 */
@@ -101,13 +100,13 @@ public class Song {
 	/**
 	 * @return the duration
 	 */
-	public int getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
 	/**
 	 * @param duration the duration to set
 	 */
-	public void setDuration(int duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 	/**
@@ -122,7 +121,23 @@ public class Song {
 	public void setYear(Date year) {
 		this.year = year;
 	}
-	
-	
+	/**
+	 * @return the owner
+	 */
+	public long getOwner() {
+		return owner;
+	}
+	/**
+	 * @param owner the owner to set
+	 */
+	public void setOwner(long owner) {
+		this.owner = owner;
+	}
+
+//	@ManyToOne(targetEntity = (User.class))
+//	@JoinColumn(name = "COD", insertable = false, updatable = false)
+//	//@Column(nullable=false,precision=10, scale=0)
+//	private User owner;
+		
 	
 }

@@ -55,7 +55,7 @@ public class UserController {
 		long save;
 		if ((save=login.save(user))!=0) {
 			if(save==-2)notifyService.addErrorMessage("User already exist!");
-			if(save==-1)notifyService.addErrorMessage("Uknow Error :c");
+			if(save==-1)notifyService.addErrorMessage("Unknow Error :c");
 			return "/register";
 		}
 

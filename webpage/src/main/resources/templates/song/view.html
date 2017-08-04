@@ -9,22 +9,46 @@
 
 	<div th:replace="/fragments/header :: header" />
 
-
+<div>
 	<article>
 		<h2 class="title" th:text="${song.title}">Song's Title</h2>
+
 		<h4>Song's Album:</h4>
-		<span th:text="${song.albumName}">AlbumName</span>
+		<span th:text="${song.albumName}">AlbumName</span> <br></br>
+
 		<h4>Song's Artist:</h4>
-		<span th:text="${song.artistName}">ArtistName</span>
+		<span th:text="${song.artistName}">ArtistName</span> <br></br>
+
 		<h4>Song's Genre:</h4>
-		<span th:text="${song.genre}">Genre</span>
+		<span th:text="${song.genre}">Genre</span> <br></br>
+
 		<h4>Song's Duration:</h4>
-		<span th:text="${song.duration}">Duration</span>
-		<div class="date">
-			<i>Publicated in: </i> <span
-				th:text="${song.year != null ? #dates.format(song.year, 'yyyy') : song.year }">2016</span>
-		</div>
+		<span th:text="${song.duration}">Duration</span> <br></br>
+
+		<h4>Publicated in:</h4>
+		<span th:text="${song.year}">2016</span> <br></br>
 	</article>
+</div>
+	<form method="post">
+		<input name="_method" type="hidden" value="PUT" />
+		<fieldset>
+			<div class="row">
+				<div>
+					<input type="submit" class="btn btn-lg btn-primary" value="Edit" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<form method="post">
+		<input name="_method" type="hidden" value="DELETE" />
+		<fieldset>
+			<div class="row">
+				<div>
+					<input type="submit" class="btn btn-lg btn-primary" value="Delete" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
 
 
 	<div th:replace="fragments/footer :: footer" />
