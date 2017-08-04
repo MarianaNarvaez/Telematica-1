@@ -1,0 +1,51 @@
+h1{
+	color:#0000FF;
+}
+
+h2{
+	color:#FF0000;
+}
+footer {
+    bottom:0;
+    text-align: center;
+}
+
+body>aside {
+  float: right;
+  width: 200px;
+  background: #CCC;
+  padding: 15px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+body>aside h2 {
+  margin: 5px 0px 15px 0px;
+}
+
+body>aside a {
+  display: block;
+  margin: 5px 0px;
+  text-decoration: none;
+}
+
+body>main:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+ul#messages li {
+display: block;
+width: 80%;
+margin: 5px auto;
+text-align: center;
+padding: 5px;
+border-radius: 5px;
+}
+ul#messages li.info {
+background: #7f7;
+}
+ul#messages li.error {
+background: #d00;
+color: white;
+}

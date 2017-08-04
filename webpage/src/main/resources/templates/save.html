@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf Hello World Example</title>
+
+<div th:replace="fragments/header :: header-css" />
+</head>
+<body>
+<div th:replace="fragments/header :: header" />
+
+	<div class="container">
+
+		<div class="starter-template">
+			<h1>Guardando canciones</h1>
+			<h2>
+				<span th:text="'Message: ' + ${message}"></span>
+			</h2>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div th:replace="fragments/footer :: footer"/> 
+</body>
+</html>

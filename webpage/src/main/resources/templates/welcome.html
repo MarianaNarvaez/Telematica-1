@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home</title>
+
+<div th:replace="fragments/header :: header-css" />
+</head>
+<body>
+	<div th:replace="fragments/header :: header" />
+
+	<div class="container">
+
+		<div class="starter-template">
+			<h1>Welcome to the public wall!</h1>
+			<h2>
+				<span th:text="'Message: ' + ${message}" th:if="${logedUser == null}"></span>
+			</h2>
+		</div>
+
+	</div>
+	<!-- /.container -->
+<!-- 
+private Long id;
+private String title;
+private String body;
+private User author;
+private Date date = new Date(); -->
+<!-- 
+private long cod;
+	private String title;
+	private String albumName;
+	private String artistName;
+	private String genre;
+	private int duration;
+	private Date year; -->
+	
+<aside>
+<h2>Recent Posts</h2>
+<a href="#" th:each="song : ${latest}" th:text="${song.title}" th:href="@{/song/{cod}/(cod=${song.cod})}">Does this work?</a>
+</aside>
+
+<main id="songs">
+    <article th:each="song : ${songs}">
+      <h2 class="title" th:text="${song.title}">Song's Title</h2>
+      <h4>Song's Album: </h4><span th:text="${song.albumName}">AlbumName</span>
+      <h4>Song's Artist: </h4>
+      <span th:text="${song.artistName}">ArtistName</span>
+      <h4>Song's Genre: </h4>
+      <span th:text="${song.genre}">Genre</span>
+      <h4>Song's Duration: </h4>
+      <span th:text="${song.duration}">Duration</span>
+      <div class="date">
+        <i>Publicated in: </i>
+        <span th:text="${song.year != null ? #dates.format(song.year, 'yyyy') : song.year }">2016</span>
+      </div>
+    </article>
+</main>
+
+
+
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div th:replace="fragments/footer :: footer"/> 
+</body>
+</html>
