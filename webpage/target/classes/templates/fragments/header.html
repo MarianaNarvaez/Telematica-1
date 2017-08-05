@@ -3,12 +3,13 @@
 <div th:fragment="header-css">
 	<!-- this is header-css -->
 	<link rel="stylesheet" type="text/css"
-		href=" http://localhost:8080/webjars/bootstrap/3.3.7/css/bootstrap.min.css" ></link>
+		href=" http://localhost:8080/webjars/bootstrap/3.3.7/css/bootstrap.min.css" media="screen"></link>
 
 	<link rel="stylesheet" th:href="@{/css/main.css}"
 		href="http://localhost:8080/css/main.css" ></link>
 		
-<script src="http://localhost:8080/public/js/main.js" th:src="@{/js/main.js}"></script>
+<script type="application/javascript" src="http://localhost:8080/public/js/main.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script type="application/javascript" src="http://localhost:8080/public/js/main.js" th:src="@{/js/main.js}"></script>
 </div>
 </head>
 <body>

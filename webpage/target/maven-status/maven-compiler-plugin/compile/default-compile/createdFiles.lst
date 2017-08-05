@@ -1,2 +1,14 @@
-webpage\webpage\App.class
-webpage\webpage\welcomeController.class
+webpage\controller\WebController.class
+webpage\views\App.class
+webpage\model\UserRepository.class
+webpage\controller\NotificationService$NotificationMessage.class
+webpage\model\SongsRepository.class
+webpage\views\entities\User.class
+webpage\controller\NotificationService$NotificationMessageType.class
+webpage\views\Login.class
+webpage\views\entities\Song.class
+webpage\controller\SongsWebController.class
+webpage\controller\UserController.class
+webpage\controller\NotificationService.class
+webpage\views\SongsView.class
+webpage\controller\SongsJsonController.class
