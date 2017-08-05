@@ -11,16 +11,16 @@
 
 	<form method="post" th:object="${song}">
 
-		private long cod; private String title; private String albumName;
-		private String artistName private String genre; private int duration;
-		private Date year; private long owner;
+		<input th:if="${internalMode}=='editing'" name="_method" type="hidden"
+			value="PATCH" />
 
 		<div class="container">
 			<div class="row" style="margin-top: 20px">
 				<div
 					class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 					<fieldset>
-						<h2>Add your new song!</h2>
+						<h2 th:if="${internalMode}=='saving'">Add your new song!</h2>
+						<h2 th:if="${internalMode}=='editing'">What do you want to change?</h2>
 
 						<div class="form-group">
 							<input type="text" name="title" id="title"
@@ -52,16 +52,22 @@
 								class="form-control input-lg" placeholder="Year of publication"
 								th:value="*{year}" />
 						</div>
+						<input th:if="${internalMode} == 'saving'" name="owner"
+							type="hidden" value="25" />
 
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<input type="submit" class="btn btn-lg btn-primary btn-block"
-									value="Create" />
+									value="Save" />
 							</div>
 							<div class="col-xs-6 col-sm-6 col-md-6"></div>
 
 							<div class="col-xs-6 col-sm-6 col-md-6">
-								<a th:href="@{/}" class="btn btn-lg btn-primary btn-block">Cancel</a>
+								<a th:if="${internalMode}=='saving'" th:href="@{/}"
+									class="btn btn-lg btn-primary btn-block">Cancel</a> 
+									<a
+									th:if="${internalMode}=='editing'" th:href="@{/song/{cod}/(cod=${song.cod})}"
+									class="btn btn-lg btn-primary btn-block">Cancel</a>
 							</div>
 						</div>
 					</fieldset>

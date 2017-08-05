@@ -22,7 +22,7 @@ public class SongsView {
 	}
 	
 	public List<Song> findAll(){
-		return songRepo.findAll();
+		return songRepo.findAllByOrderByTitleAsc();
 	}
 	
 	public long save(Song song){
@@ -39,6 +39,15 @@ public class SongsView {
 			songRepo.delete(song);
 		} catch (DataIntegrityViolationException e) {
 			return -2;
+		} catch (Exception e) {
+			return -1;
+		}
+		return 0;
+	}
+	
+	public long edit(Song song){
+		try {
+			songRepo.save(song);
 		} catch (Exception e) {
 			return -1;
 		}

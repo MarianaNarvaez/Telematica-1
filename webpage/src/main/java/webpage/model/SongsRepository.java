@@ -10,10 +10,8 @@ import webpage.views.entities.Song;
 
 @Repository
 public interface SongsRepository  extends JpaRepository<Song,Long>{
-	public List<Song> findAllByOrderByTitleAsc();
 	
-//	@Query("Select s from Song s where s.title like %:title%")
-//	public List<Song> findByTitleLike(@Param("title")String title);
-	
+	public List<Song> findAllByOrderByTitleAsc();	
 	public List<Song> findByTitleIgnoreCaseContaining(String title);
+	public List<Song> findAllByOwner(long owner);
 }

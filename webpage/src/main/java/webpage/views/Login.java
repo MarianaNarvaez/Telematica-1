@@ -29,8 +29,19 @@ public class Login {
 		} catch (Exception e) {
 			return -1;
 		}
-		return 0;
-		
+		return 0;	
+	}
+	
+	public User findOne(long cod){
+		return userRepo.findOne(cod);
 	}
 
+	public long edit(User user) {
+		try {
+			userRepo.save(user);
+		} catch (Exception e) {
+			return -1;
+		}
+		return 0;	
+	}
 }

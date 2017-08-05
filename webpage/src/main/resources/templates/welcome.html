@@ -24,7 +24,9 @@
 
 	<main id="songs">
 	<article th:each="song : ${songs}">
-		<h2 class="title" th:text="${song.title}">Song's Title</h2>
+		<h2 class="title" >
+			<a th:text="${song.title}" th:href="@{/song/{cod}/(cod=${song.cod})}">Song's Title</a>
+		</h2>
 
 		<h4>Song's Album:</h4>
 		<span th:text="${song.albumName}" class="nobr">AlbumName</span> <br></br>

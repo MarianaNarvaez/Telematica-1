@@ -1,7 +1,5 @@
 package webpage.views.entities;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +32,7 @@ public class Song {
 	@Column(nullable=false,precision=5, scale=0)
 	private Integer duration;
 	@Column(nullable=true)
-	private Date year;
+	private Integer year;
 	@Column(nullable=false)
 	private long owner;
 	/**
@@ -112,13 +110,13 @@ public class Song {
 	/**
 	 * @return the year
 	 */
-	public Date getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	/**
 	 * @param year the year to set
 	 */
-	public void setYear(Date year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 	/**

@@ -20,6 +20,12 @@ public class UserController {
 	@Autowired
 	private NotificationService notifyService;
 
+	@RequestMapping("/logout")
+	public String logout(User user) {
+		notifyService.addInfoMessage("You have been logout successfully");
+		return "login";
+	}
+
 	@RequestMapping("/login")
 	public String loginPage(User user) {
 		return "login";
@@ -31,35 +37,71 @@ public class UserController {
 			notifyService.addErrorMessage("Please fill the form correctly!");
 			return "/login";
 		}
-		long userCod=-1;
-		if ((userCod=login.authenticate(user.getUsername(), user.getPassword()))==-1) {
+		long userCod = -1;
+		if ((userCod = login.authenticate(user.getUsername(), user.getPassword())) == -1) {
 			notifyService.addErrorMessage("Invalid Username or Password!");
 			return "/login";
 		}
-		model.addAttribute("loggedUser",userCod);
+		model.addAttribute("loggedUser", userCod);
 		notifyService.addInfoMessage("Login successful");
 		return "redirect:/";
 	}
 
 	@RequestMapping("/register")
 	public String registerPage(User user, Model model) {
+		model.addAttribute("internalMode", "saving");
 		return "/register";
 	}
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@Valid User user, BindingResult bindingResult) {
+	public String register(@Valid User user, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Please fill the form correctly!");
+			model.addAttribute("internalMode", "saving");
 			return "/register";
 		}
 		long save;
-		if ((save=login.save(user))!=0) {
-			if(save==-2)notifyService.addErrorMessage("User already exist!");
-			if(save==-1)notifyService.addErrorMessage("Unknow Error :c");
+		if ((save = login.save(user)) != 0) {
+			if (save == -2)
+				notifyService.addErrorMessage("User already exist!");
+			if (save == -1)
+				notifyService.addErrorMessage("Unknow Error :c");
+			model.addAttribute("internalMode", "saving");
 			return "/register";
 		}
 
 		notifyService.addInfoMessage("Sing up successful");
 		return "redirect:/login";
+	}
+
+	@RequestMapping(value = "/profile")
+	public String profile(User user, Model model) {
+		model.addAttribute("internalMode", "editing");
+		User find =login.findOne(1l);
+		if(find==null){
+			notifyService.addErrorMessage("User not found!");	
+			return "redirect:/";
+		}
+		model.addAttribute("user", find);
+		return "/register";
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.PATCH)
+	public String profile(@Valid User user, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			notifyService.addErrorMessage("Please fill the form correctly!");
+			model.addAttribute("internalMode", "editing");
+			return "/register";
+		}
+		long save;
+		if ((save = login.edit(user)) != 0) {
+			if (save == -1)
+				notifyService.addErrorMessage("Unknow Error :c");
+			model.addAttribute("internalMode", "editing");
+			return "/register";
+		}		
+
+		notifyService.addInfoMessage("Modifications complete!");
+		return "redirect:/";
 	}
 }

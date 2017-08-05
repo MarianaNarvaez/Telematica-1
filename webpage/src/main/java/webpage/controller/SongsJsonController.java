@@ -18,7 +18,6 @@ import webpage.views.entities.Song;
 @Controller
 public class SongsJsonController {
 
-	@SuppressWarnings("unused")
 	@Autowired
 	private SongsView songsView;
 	@Autowired
@@ -27,10 +26,10 @@ public class SongsJsonController {
 	UserRepository userRepo;
 
 	
-//	@RequestMapping(value = "/song", method = RequestMethod.GET)
-//	public ResponseEntity<?> findAll() {
-//		return new ResponseEntity<>(songRepo.findAll(), HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/findAllSong", method = RequestMethod.GET)
+	public ResponseEntity<?> findAll() {
+		return new ResponseEntity<>(songRepo.findAll(), HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/songs", method = RequestMethod.POST)
 	public ResponseEntity<?> saveSong(@RequestBody List<Song> songs) {
