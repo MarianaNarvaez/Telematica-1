@@ -18,7 +18,7 @@ public class WebController {
 		model.addAttribute("songs", songsView.findAll());
 		model.addAttribute("latest", songsView.findAll());
 		model.addAttribute("user", 1);
-		return "welcome";
+		return "collection";
 	}
 
 
