@@ -35,12 +35,12 @@ public class UserController {
 	public String login(@Valid User user, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Please fill the form correctly!");
-			return "/login";
+			return "login";
 		}
 		long userCod = -1;
 		if ((userCod = login.authenticate(user.getUsername(), user.getPassword())) == -1) {
 			notifyService.addErrorMessage("Invalid Username or Password!");
-			return "/login";
+			return "login";
 		}
 		model.addAttribute("loggedUser", userCod);
 		notifyService.addInfoMessage("Login successful");
@@ -50,7 +50,7 @@ public class UserController {
 	@RequestMapping("/register")
 	public String registerPage(User user, Model model) {
 		model.addAttribute("internalMode", "saving");
-		return "/register";
+		return "register";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -58,7 +58,7 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Please fill the form correctly!");
 			model.addAttribute("internalMode", "saving");
-			return "/register";
+			return "register";
 		}
 		long save;
 		if ((save = login.save(user)) != 0) {
@@ -67,7 +67,7 @@ public class UserController {
 			if (save == -1)
 				notifyService.addErrorMessage("Unknow Error :c");
 			model.addAttribute("internalMode", "saving");
-			return "/register";
+			return "register";
 		}
 
 		notifyService.addInfoMessage("Sing up successful");
@@ -77,13 +77,13 @@ public class UserController {
 	@RequestMapping(value = "/profile")
 	public String profile(User user, Model model) {
 		model.addAttribute("internalMode", "editing");
-		User find =login.findOne(1l);
-		if(find==null){
-			notifyService.addErrorMessage("User not found!");	
+		User find = login.findOne(1l);
+		if (find == null) {
+			notifyService.addErrorMessage("User not found!");
 			return "redirect:/";
 		}
 		model.addAttribute("user", find);
-		return "/register";
+		return "register";
 	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.PATCH)
@@ -91,15 +91,15 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Please fill the form correctly!");
 			model.addAttribute("internalMode", "editing");
-			return "/register";
+			return "register";
 		}
 		long save;
 		if ((save = login.edit(user)) != 0) {
 			if (save == -1)
 				notifyService.addErrorMessage("Unknow Error :c");
 			model.addAttribute("internalMode", "editing");
-			return "/register";
-		}		
+			return "register";
+		}
 
 		notifyService.addInfoMessage("Modifications complete!");
 		return "redirect:/";

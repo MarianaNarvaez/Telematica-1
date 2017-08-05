@@ -25,26 +25,28 @@ public class SongsWebController {
 	public String findCollection(Model model) {
 		model.addAttribute("songs", songsView.findAll());
 		model.addAttribute("latest", songsView.findAll());
-		return "/collection";
+		return "collection";
 	}
 
 	@RequestMapping(value = "/song", method = RequestMethod.GET)
 	public String newSong(Song song, Model model) {
 		model.addAttribute("internalMode", "saving");
-		return "/song/save";
+		return "song/save";
 	}
 
 	@RequestMapping(value = "/song", method = RequestMethod.POST)
-	public String saveSong(@Valid Song song, BindingResult bindingResult) {
+	public String saveSong(@Valid Song song, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Please fill the form correctly!");
-			return "/song/save";
+			model.addAttribute("internalMode", "saving");
+			return "song/save";
 		}
 		long save;
 		if ((save = songsView.save(song)) != 0) {
 			if (save == -1)
 				notifyService.addErrorMessage("Unknow Error :c");
-			return "/song/save";
+			model.addAttribute("internalMode", "saving");
+			return "song/save";
 		}
 
 		notifyService.addInfoMessage("Song added successfully");
@@ -71,7 +73,7 @@ public class SongsWebController {
 				notifyService.addErrorMessage("Unknow Error :c");
 			if (save == -2)
 				notifyService.addErrorMessage("Title already exists!");
-			return "/song/view";
+			return "song/view";
 		}
 
 		notifyService.addInfoMessage("Song deleted successfully");
@@ -91,14 +93,14 @@ public class SongsWebController {
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Please fill the form correctly!");
 			model.addAttribute("internalMode", "editing");
-			return "/song/save";
+			return "song/save";
 		}
 		long save;
 		if ((save = songsView.edit(song)) != 0) {
 			if (save == -1)
 				notifyService.addErrorMessage("Unknow Error :c");
 			model.addAttribute("internalMode", "editing");
-			return "/song/save";
+			return "song/save";
 		}
 
 		notifyService.addInfoMessage("Modifications complete!");
