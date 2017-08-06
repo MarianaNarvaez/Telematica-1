@@ -15,8 +15,8 @@ public class WebController {
 
 	@RequestMapping("/")
 	public String welcome(Model model) {
-		model.addAttribute("songs", songsView.findAll());
-		model.addAttribute("latest", songsView.findAll());
+		model.addAttribute("songs", songsView.findPublics());
+		model.addAttribute("latest", songsView.findLatest());
 		model.addAttribute("user", 1);
 		return "welcome";
 	}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${search}!= null ? ${search} : 'Search'">Title</title>
+<meta charset="UTF-8"></meta>
+<div th:replace="/fragments/header :: header-css" />
+</head>
+<body>
+
+	<div th:replace="/fragments/header :: header" />
+
+	<div class="container">
+		<form method="post" th:object="${search}">
+			<div class="row" style="margin-top: 20px">
+				<div
+					class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+					<fieldset>
+						<div>
+							<h2 class="title">Search songs by Title!</h2>
+							<div class="form-group">
+								<input type="text" name="search" id="search"
+									class="form-control input-lg" placeholder="Title"
+									required="true" autofocus="true" th:value="${search}" />
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<input type="submit" class="btn btn-lg btn-primary btn-block"
+								value="Search" />
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<div class="container" th:if="${songs} != null">
+
+		<div class="row" style="margin-top: 20px">
+			<div
+				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+
+				<fieldset>
+					<div>
+						<article th:each="song : ${songs}">
+							<h2 class="title">
+								<a th:text="${song.title}"
+									th:href="@{/song/{cod}/(cod=${song.cod})}">Song's Title</a>
+							</h2>
+
+							<h4>Song's Album:</h4>
+							<span th:text="${song.albumName}" class="nobr">AlbumName</span> <br></br>
+
+							<h4>Song's Artist:</h4>
+							<span th:text="${song.artistName}">ArtistName</span> <br></br>
+
+							<h4>Song's Genre:</h4>
+							<span th:text="${song.genre}">Genre</span> <br></br>
+
+							<h4>Song's Duration:</h4>
+							<span th:text="${song.duration}">Duration</span> <br></br>
+
+							<h4>Publicated in:</h4>
+							<span th:text="${song.year}">2016</span> <br></br>
+						</article>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div th:replace="fragments/footer :: footer" />
+
+</body>
+</html>

@@ -34,7 +34,10 @@ public class Song {
 	@Column(nullable=true)
 	private Integer year;
 	@Column(nullable=false)
-	private long owner;
+	private String owner;
+	@Column(nullable=false)
+	private char publicContent;
+	
 	/**
 	 * @return the cod
 	 */
@@ -122,14 +125,26 @@ public class Song {
 	/**
 	 * @return the owner
 	 */
-	public long getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 	/**
 	 * @param owner the owner to set
 	 */
-	public void setOwner(long owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	/**
+	 * @return the publicContent
+	 */
+	public char getPublicContent() {
+		return publicContent;
+	}
+	/**
+	 * @param publicContent the publicContent to set
+	 */
+	public void setPublicContent(char publicContent) {
+		this.publicContent = publicContent;
 	}
 
 //	@ManyToOne(targetEntity = (User.class))

@@ -45,6 +45,7 @@ public class UsersView {
 
 	public long edit(User user) {
 		try {
+			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			userRepo.save(user);
 		} catch (Exception e) {
 			return -1;

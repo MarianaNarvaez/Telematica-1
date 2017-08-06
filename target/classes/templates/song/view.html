@@ -41,7 +41,7 @@
 							<span th:text="${song.year}">2016</span> <br></br>
 						</article>
 					</div>
-					<div class="row">
+					<div class="row" th:if="${song.owner} == ${#authentication.name}">
 						<div class="col-xs-6 col-sm-6 col-md-6">
 							<form method="post" th:object="${song}">
 								<input name="_method" type="hidden" value="PUT" /> <input

@@ -1,8 +1,12 @@
 package webpage.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +27,14 @@ public class SongsWebController {
 
 	@RequestMapping(value = "/collection")
 	public String findCollection(Model model) {
-		model.addAttribute("songs", songsView.findAll());
-		model.addAttribute("latest", songsView.findAll());
+		Authentication user = SecurityContextHolder.getContext().getAuthentication();
+		if (user == null) {
+			notifyService.addErrorMessage("Please Log in first!");
+			return "redirect:/login";
+		}
+		String username = user.getName();
+		model.addAttribute("songs", songsView.findByOwner(username));
+		model.addAttribute("latest", songsView.findLatest());
 		return "collection";
 	}
 
@@ -107,6 +117,30 @@ public class SongsWebController {
 		return "redirect:/song/{cod}";
 	}
 
+	@RequestMapping(value = "/search")
+	public String searchPage(String search, Model model) {
+		// model.addAttribute("song",songsView.findOne(1l));
+		return "song/search";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search(String search, Model model) {
+		List<Song> songs;
+
+		Authentication user = SecurityContextHolder.getContext().getAuthentication();
+		if (user == null) {
+			if ((songs = songsView.findByTitle(search)) == null || songs.isEmpty()) {
+				notifyService.addErrorMessage("Not matches found! :c");
+				return "song/search";
+			}
+		}else if ((songs = songsView.findByTitleOwner(search,user.getName())) == null || songs.isEmpty()) {
+			notifyService.addErrorMessage("Not matches found! :c");
+			return "song/search";
+		}
+
+		model.addAttribute("songs",songs);
+		return "song/search";
+	}
 	// @RequestMapping(value = "/song/title", method = RequestMethod.POST)
 	// public ResponseEntity<?> findByName(@RequestParam("title") String title)
 	// {

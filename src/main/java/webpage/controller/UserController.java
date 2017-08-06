@@ -22,7 +22,7 @@ public class UserController {
 
 	@RequestMapping("/logout-success")
 	public String logout(User user) {
-		notifyService.addInfoMessage("You have been logout successfully");
+		notifyService.addInfoMessage("You have been logged successfully");
 		return "login";
 	}
 
