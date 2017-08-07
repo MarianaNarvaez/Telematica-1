@@ -3,6 +3,8 @@ package webpage.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -87,12 +89,19 @@ public class UserController {
 
 	@RequestMapping(value = "/profile")
 	public String profile(User user, Model model) {
-		model.addAttribute("internalMode", "editing");
-		User find = usersView.findOne(1l);
+
+		Authentication actual = SecurityContextHolder.getContext().getAuthentication();
+		if (actual == null) {
+			notifyService.addErrorMessage("Please Log in first!");
+			return "redirect:/login";
+		}
+		User find = usersView.findByUsername(actual.getName());
 		if (find == null) {
 			notifyService.addErrorMessage("User not found!");
 			return "redirect:/";
 		}
+
+		model.addAttribute("internalMode", "editing");
 		model.addAttribute("user", find);
 		return "register";
 	}
