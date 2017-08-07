@@ -4,11 +4,10 @@
 <div th:fragment="header-css">
 	<!-- this is header-css -->
 	<link rel="stylesheet" type="text/css"
-		href=" http://localhost:8080/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
 		media="screen"></link>
 
-	<link rel="stylesheet" th:href="@{/css/main.css}"
-		href="http://localhost:8080/css/main.css"></link>
+	<link rel="stylesheet" th:href="@{/css/main.css}"></link>
 
 	<script type="application/javascript"
 		src="http://localhost:8080/public/js/main.js"
@@ -32,16 +31,16 @@
 					<div id="navbar" class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li><a th:href="@{/}">Home</a></li>
-							<li><a sec:authorize="isAuthenticated()"
+							<li sec:authorize="isAuthenticated()"><a
 								th:href="@{/collection}">Your Collection</a></li>
-							<li><a sec:authorize="isAuthenticated()" th:href="@{/song}">Add
+							<li sec:authorize="isAuthenticated()"><a th:href="@{/song}">Add
 									Song</a></li>
 							<li><a th:href="@{/search}">Search</a></li>
-							<li><a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
-							<li><a sec:authorize="isAnonymous()" th:href="@{/register}">Register</a></li>
-							<li><a sec:authorize="isAuthenticated()"
+							<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+							<li sec:authorize="isAnonymous()"><a th:href="@{/register}">Register</a></li>
+							<li sec:authorize="isAuthenticated()"><a
 								th:href="@{/profile}">Profile</a></li>
-							<li><a sec:authorize="isAuthenticated()"
+							<li sec:authorize="isAuthenticated()"><a
 								th:href="@{/logout}">Logout</a></li>
 							<li sec:authorize="isAuthenticated()"><a>Logged User: <b><span
 										sec:authentication="name"></span></b></a></li>
