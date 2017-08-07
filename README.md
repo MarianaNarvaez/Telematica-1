@@ -1,6 +1,6 @@
 # Spring webpage
 
-By: Edwin Montoya Munera - emontoya@eafit.educo
+By: Mateo Murillo Penagos - mmurill5@eafit.edu.co
 
 # Descripción de aplicación
 
