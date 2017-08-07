@@ -4,11 +4,11 @@
 <head>
 <title th:text="${search}!= null ? ${search} : 'Search'">Title</title>
 <meta charset="UTF-8"></meta>
-<div th:replace="/fragments/header :: header-css" />
+<div th:replace="fragments/header :: header-css" />
 </head>
 <body>
 
-	<div th:replace="/fragments/header :: header" />
+	<div th:replace="fragments/header :: header" />
 
 	<div class="container">
 		<form method="post" th:object="${search}">
