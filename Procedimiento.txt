@@ -1,0 +1,18 @@
+vpn
+	user de eafit y password dada por el profe
+Entrar a mi servidor
+	10.131.137.180
+	- Conectarse con putty (windows) / ssh (Linux)
+	- user default -> user1 / eafit.2017  (Es sudo)
+	-Crear mi propio usuario
+		#useradd mmurill5
+		#passwd mmurill5
+Instalar el ambiente
+	ejecucion del proyecto
+	-Lenguaje
+	-Framework
+	-DB
+	->ejecutar
+
+
+PostgreSQL: "C:/Program Files/PostgreSQL/9.6/bin/pg_ctl.exe" start -D "C:/Program Files/PostgreSQL/9.6/data"
