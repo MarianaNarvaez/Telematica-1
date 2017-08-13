@@ -9,8 +9,9 @@
 	<div th:replace="fragments/header :: header" />
 
 
-	<form method="post" th:object="${song}">
 
+
+	<form method="post" enctype="multipart/form-data" th:object="${song}">
 		<input th:if="${internalMode}=='editing'" name="_method" type="hidden"
 			value="PATCH" />
 
@@ -23,46 +24,27 @@
 						<h2 th:if="${internalMode}=='editing'">What do you want to
 							change?</h2>
 
-						<div class="form-group">
+
+						<input th:if="${internalMode}=='saving'" type="file" name="songs"
+							id="songs" multiple="multiple" accept="audio/mpeg" /> <br />
+
+						<div th:if="${internalMode}=='editing'" class="form-group">
 							<input type="text" name="title" id="title"
 								class="form-control input-lg" placeholder="Title"
 								required="true" autofocus="true" th:value="*{title}" />
-						</div>
-						<div class="form-group">
-							<input type="text" name="albumName" id="albumName"
-								class="form-control input-lg" placeholder="Album's Name"
-								th:value="*{albumName}" />
-						</div>
-						<div class="form-group">
-							<input type="text" name="artistName" id="artistName"
-								class="form-control input-lg" placeholder="Artist's Name"
-								th:value="*{artistName}" />
-						</div>
-						<div class="form-group">
-							<input type="text" name="genre" id="genre"
-								class="form-control input-lg" placeholder="Genre"
-								th:value="*{genre}" />
-						</div>
-						<div class="form-group">
-							<input type="text" name="duration" id="duration"
-								class="form-control input-lg" placeholder="Duration"
-								required="true" th:value="*{duration}" />
-						</div>
-						<div class="form-group">
-							<input type="text" name="year" id="year"
-								class="form-control input-lg" placeholder="Year of publication"
-								th:value="*{year}" />
 						</div>
 						<div class="form-group">
 							<input type="radio" id="publicContent" name="publicContent"
 								value="P" checked="checked" />Public<br></br> <input
 								type="radio" id="publicContent" name="publicContent" value="V" />Private<br></br>
 						</div>
-						<input th:if="${internalMode} == 'saving'" name="owner"
-							type="hidden" th:value="${#authentication.name}" /> <input
-							th:if="${internalMode} == 'editing'" name="owner" type="hidden"
-							th:value="${#authentication.name}" />
+						<input name="owner" type="hidden"
+							th:value="${#authentication.name}" /> <input name="path"
+							type="hidden" th:value="${song.path}" />
+							<input name="oldTitle"
+							type="hidden" th:value="${song.title}" />
 						<div class="row">
+
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<input type="submit" class="btn btn-lg btn-primary btn-block"
 									value="Save" />
@@ -81,7 +63,6 @@
 				</div>
 			</div>
 		</div>
-
 
 	</form>
 

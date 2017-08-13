@@ -12,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import webpage.model.SongsRepository;
 import webpage.model.UserRepository;
-import webpage.views.SongsView;
 import webpage.views.entities.Song;
 
 @Controller
 public class SongsJsonController {
 
-	@Autowired
-	private SongsView songsView;
 	@Autowired
 	SongsRepository songRepo;
 	@Autowired
@@ -48,13 +45,6 @@ public class SongsJsonController {
 //		return new ResponseEntity<>(songRepo.findByTitleIgnoreCaseContaining(title), HttpStatus.OK);
 //	}
 //
-	@RequestMapping(value = "/song/savetest", method = RequestMethod.POST)
-	public ResponseEntity<?> saveTest(@RequestBody List<Song> songs) {
-		for (Song s : songs) {
-			s.setAlbumName("pruebitas");
-			songsView.saveTest(s);
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	
 	
 }
