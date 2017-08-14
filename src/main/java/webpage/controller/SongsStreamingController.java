@@ -62,7 +62,7 @@ public class SongsStreamingController {
 			File mp3 = songsView.findFile(cod, username);
 			// set response headers
 			response.setContentType("audio/mpeg");
-			response.addHeader("Content-Disposition", "attachment; filename=Anotsu   Man On The Run.mp3");
+			response.addHeader("Content-Disposition", "attachment; filename="+mp3.getName());
 			response.setContentLength((int) mp3.length());
 
 			FileInputStream input = new FileInputStream(mp3);

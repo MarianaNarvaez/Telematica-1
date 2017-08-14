@@ -23,10 +23,10 @@
 	<dependencies>
 
 		<!-- connection to postgresql -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-		</dependency> 
+		</dependency>  -->
 		
 		<!-- H2 Database for testing -->
 		<dependency>
