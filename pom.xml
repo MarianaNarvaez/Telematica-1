@@ -29,10 +29,10 @@
 		</dependency> 
 		
 		<!-- H2 Database for testing -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!-- Hikkari connection pool, for a fast request to DB -->
 		<dependency>
