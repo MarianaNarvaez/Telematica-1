@@ -24,8 +24,8 @@ public class UserController {
 
 	@RequestMapping("/logout-success")
 	public String logout(User user) {
-		notifyService.addInfoMessage("You have been logged successfully");
-		return "login";
+		notifyService.addInfoMessage("You have been logged out successfully");
+		return "redirect:/login";
 	}
 
 	@RequestMapping("/login")
@@ -36,7 +36,7 @@ public class UserController {
 	@RequestMapping("/login-error")
 	public String loginPageError(User user) {
 		notifyService.addErrorMessage("Invalid convination of Username and Password!");
-		return "login";
+		return "redirect:/login";
 	}
 	@RequestMapping("/login-success")
 	public String loginPageSucces(User user) {
@@ -91,7 +91,7 @@ public class UserController {
 	public String profile(User user, Model model) {
 
 		Authentication actual = SecurityContextHolder.getContext().getAuthentication();
-		if (actual == null) {
+		if (actual.getName().equals("anonymousUser")) {
 			notifyService.addErrorMessage("Please Log in first!");
 			return "redirect:/login";
 		}

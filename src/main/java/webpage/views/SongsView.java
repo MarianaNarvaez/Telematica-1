@@ -28,14 +28,14 @@ public class SongsView {
 
 	public int save(List<MultipartFile> songs, char publicContent, String username) {
 
-		if (songs.isEmpty() || songs == null || songs.size() == 0)
-			return -4;
+//		if (songs.isEmpty() || songs == null || songs.size() == 0)
+//			return -4;
 
 		final String path = App.songsPath + File.separator + username + File.separator;
 		File x = new File(path);
 		try {
 			if (!x.exists()) {
-				x.mkdirs();
+				if(!x.mkdirs())return -3;
 			}
 		} catch (Exception e) {
 			return -3;
@@ -99,11 +99,14 @@ public class SongsView {
 				return -2;
 			songRepo.delete(song);
 			File file = new File(song.getPath());
-			file.delete();
+			if(file.delete()){
+				return 0;
+			}else{
+				return -3;
+			}
 		} catch (Exception e) {
 			return -3;
 		}
-		return 0;
 	}
 
 	public long edit(Song song, String oldTitle, String username) {

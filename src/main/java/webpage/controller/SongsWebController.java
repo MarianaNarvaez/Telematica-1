@@ -28,6 +28,11 @@ public class SongsWebController {
 
 	@RequestMapping(value = "/song", method = RequestMethod.GET)
 	public String newSong(Model model, Song song) {
+		Authentication user = SecurityContextHolder.getContext().getAuthentication();
+		if (user.getName().equals("anonymousUser")) {
+			notifyService.addErrorMessage("Please Log in first!");
+			return "redirect:/login";
+		}
 		model.addAttribute("internalMode", "saving");
 		return "song/save";
 	}
@@ -35,10 +40,14 @@ public class SongsWebController {
 	@RequestMapping(value = "/song", method = RequestMethod.POST)
 	public String saveSong(List<MultipartFile> songs, char publicContent, Model model,Song song) {
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		if (user == null) {
+		if (user.getName().equals("anonymousUser")) {
 			notifyService.addErrorMessage("Login first!");
 			return "redirect:/login";
-		} else {
+		} else if(songs.size()==1 && songs.get(0).isEmpty()){
+			notifyService.addErrorMessage("Add some songs first!");
+			model.addAttribute("internalMode", "saving");
+			return "song/save";
+		}else{
 			long save;
 			if ((save = songsView.save(songs, publicContent, user.getName())) != 0) {
 				if (save == -1)
@@ -62,7 +71,7 @@ public class SongsWebController {
 	@RequestMapping(value = "/collection")
 	public String findCollection(Model model) {
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		if (user == null) {
+		if (user.getName().equals("anonymousUser")) {
 			notifyService.addErrorMessage("Please Log in first!");
 			return "redirect:/login";
 		}
@@ -92,7 +101,7 @@ public class SongsWebController {
 	@RequestMapping(value = "/song/{cod}", method = RequestMethod.DELETE)
 	public String deleteSong(@PathVariable("cod") long cod) {
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		if (user == null) {
+		if (user.getName().equals("anonymousUser")) {
 			notifyService.addErrorMessage("Login first!");
 			return "redirect:/login";
 		}
@@ -120,7 +129,7 @@ public class SongsWebController {
 			return "redirect:/";
 		}
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		if (user == null) {
+		if (user.getName().equals("anonymousUser")) {
 			notifyService.addErrorMessage("Login first!");
 			return "redirect:/login";
 		}
@@ -140,7 +149,7 @@ public class SongsWebController {
 			return "song/save";
 		}
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		if (user == null) {
+		if (user.getName().equals("anonymousUser")) {
 			notifyService.addErrorMessage("Login first!");
 			return "redirect:/login";
 		}
@@ -171,7 +180,7 @@ public class SongsWebController {
 		List<Song> songs;
 
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		if (user == null) {
+		if (user.getName().equals("anonymousUser")) {
 			if ((songs = songsView.findByTitle(search)) == null || songs.isEmpty()) {
 				notifyService.addErrorMessage("Not matches found! :c");
 				return "song/search";
@@ -184,12 +193,5 @@ public class SongsWebController {
 		model.addAttribute("songs", songs);
 		return "song/search";
 	}
-	// @RequestMapping(value = "/song/title", method = RequestMethod.POST)
-	// public ResponseEntity<?> findByName(@RequestParam("title") String title)
-	// {
-	// return new
-	// ResponseEntity<>(songRepo.findByTitleIgnoreCaseContaining(title),
-	// HttpStatus.OK);
-	// }
 
 }

@@ -30,23 +30,6 @@ public class User {
 	private String email;
 
 	protected User(){}
-
-	public User(int i){
-		switch (i){
-		case 1:
-			password="12345678";
-			break;
-		case 2:
-			username="Estaaaaa";
-			password="12345678";
-			break;
-		case 3:
-			username="Lorraaaaaa";
-			password="12345678";
-			break;
-		}
-		
-	}
 	
 	/**
 	 * @return the cod

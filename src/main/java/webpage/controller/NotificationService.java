@@ -39,7 +39,7 @@ public class NotificationService {
         ERROR
     }
 
-    public class NotificationMessage {
+    public static class NotificationMessage {
         NotificationMessageType type;
         String text;
 
