@@ -1,5 +1,7 @@
 package webpage.views;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -11,7 +13,7 @@ class ContextConfiguration {
 
 	@Bean
 	@Primary
-	public HikariDataSource primaryDataSource() {
+	public DataSource primaryDataSource() {
 		final HikariDataSource ds = new HikariDataSource();
 		ds.setMaximumPoolSize(10);
 		ds.setDriverClassName("org.postgresql.Driver");
@@ -23,7 +25,7 @@ class ContextConfiguration {
 	}	
 	
 	@Bean
-	public HikariDataSource secondaryDataSource() {
+	public DataSource secondaryDataSource() {
 		final HikariDataSource ds = new HikariDataSource();
 		ds.setMaximumPoolSize(10);
 		ds.setDriverClassName("org.postgresql.Driver");
