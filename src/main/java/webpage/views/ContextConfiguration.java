@@ -14,8 +14,8 @@ class ContextConfiguration {
 	public HikariDataSource primaryDataSource() {
 		final HikariDataSource ds = new HikariDataSource();
 		ds.setMaximumPoolSize(10);
-		ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		ds.setJdbcUrl("jdbc:oracle:thin:@10.131.137.187/music");
+		ds.setDriverClassName("org.postgresql.Driver");
+		ds.setJdbcUrl("jdbc:postgresql://10.131.137.187/music");
 		ds.setUsername("postgres");
 		ds.setPassword("eafit.2016");
 		ds.setConnectionTimeout(20000);
@@ -26,8 +26,8 @@ class ContextConfiguration {
 	public HikariDataSource secondaryDataSource() {
 		final HikariDataSource ds = new HikariDataSource();
 		ds.setMaximumPoolSize(10);
-		ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		ds.setJdbcUrl("jdbc:oracle:thin:@10.131.137.218/music");
+		ds.setDriverClassName("org.postgresql.Driver");
+		ds.setJdbcUrl("jdbc:postgresql://10.131.137.218/music");
 		ds.setUsername("postgres");
 		ds.setPassword("eafit.2016");
 		ds.setConnectionTimeout(20000);
