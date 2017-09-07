@@ -37,19 +37,12 @@ public class SongsView {
 		File x2 = new File(path2);
 		try {
 			if (!x1.exists()) {
-				if(!x1.mkdirs()){
-					System.out.println(x1.getAbsolutePath());
-					return -3;
-				}
+				if(!x1.mkdirs())return -3;
 			}
 			if( !x2.exists()){
-				if(!x2.mkdirs()){
-					System.out.println(x2.getAbsolutePath());
-					return -3;
-				}
+				if(!x2.mkdirs())return -3;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return -3;
 		}
 		String [] files = new String[2];
