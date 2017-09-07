@@ -31,18 +31,31 @@ public class SongsView {
 //		if (songs.isEmpty() || songs == null || songs.size() == 0)
 //			return -4;
 
-		final String path = App.songsPath + File.separator + username + File.separator;
-//		final String path2 = App.songsPath + File.separator + username + File.separator;
-		File x = new File(path);
+		final String path1 = App.songsPath1 + File.separator + username + File.separator;
+		final String path2 = App.songsPath2 + File.separator + username + File.separator;
+		File x1 = new File(path1);
+		File x2 = new File(path2);
 		try {
-			if (!x.exists()) {
-				if(!x.mkdirs())return -3;
+			if (!x1.exists()) {
+				if(!x1.mkdirs())return -3;
+			}
+			if( !x2.exists()){
+				if(!x2.mkdirs())return -3;
 			}
 		} catch (Exception e) {
 			return -3;
 		}
+		String [] files = new String[2];
+		files[0]=path1;
+		files[1]=path2;
+		int save;
+		if(Math.random()<0.5d){
+			save=0;
+		}else{
+			save=1;
+		}
 		List<String> names;
-		if ((names = saveFiles(songs, path)) == null)
+		if ((names = saveFiles(songs, files[save])) == null)
 			return -2;
 		try {
 			List<Song> songList = new ArrayList<Song>();
@@ -52,14 +65,14 @@ public class SongsView {
 				song.setTitle(name.substring(0, name.indexOf('.')));
 				song.setOwner(username);
 				song.setPublicContent(publicContent);
-				song.setPath(path + name);
+				song.setPath(files[save] + name);
 				songList.add(song);
 			}
 			songRepo.save(songList);
 		} catch (DataIntegrityViolationException e) {
 			return -5;
 		} catch (Exception e) {
-			deleteFiles(names, path);
+			deleteFiles(names, files[save]);
 			return -1;
 		}
 		return 0;
@@ -114,10 +127,20 @@ public class SongsView {
 		try {
 			if (!username.equals(song.getOwner()))
 				return -3;
-			final String path = App.songsPath + File.separator + username + File.separator;
-			song.setPath(path + song.getTitle() + ".mp3");
+			final String path1 = App.songsPath1 + File.separator + username + File.separator;
+			final String path2 = App.songsPath2 + File.separator + username + File.separator;
+			String [] files = new String[2];
+			files[0]=path1;
+			files[1]=path2;
+			int save;
+			if(Math.random()<0.5d){
+				save=0;
+			}else{
+				save=1;
+			}
+			song.setPath(files[save] + song.getTitle() + ".mp3");
 			songRepo.save(song);
-			Path source = Paths.get(path + oldTitle + ".mp3");
+			Path source = Paths.get(files[save] + oldTitle + ".mp3");
 			Path target = Paths.get(song.getPath());
 			Files.move(source, target);
 		} catch (DataIntegrityViolationException e) {

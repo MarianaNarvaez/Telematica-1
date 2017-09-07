@@ -13,7 +13,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("webpage.views.entities")
 @EnableJpaRepositories("webpage.model")
 public class App {
-	public static final String songsPath = (new File(File.separator+"server1")
+	public static final String songsPath1 = (new File(File.separator+"server1")
+			.getAbsolutePath());
+	public static final String songsPath2 = (new File(File.separator+"server2")
 			.getAbsolutePath());
 
 	public static void main(String[] args) {
