@@ -32,6 +32,7 @@ public class SongsView {
 //			return -4;
 
 		final String path = App.songsPath + File.separator + username + File.separator;
+//		final String path2 = App.songsPath + File.separator + username + File.separator;
 		File x = new File(path);
 		try {
 			if (!x.exists()) {
