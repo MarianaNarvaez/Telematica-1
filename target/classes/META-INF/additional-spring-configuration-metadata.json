@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "google.clientId",
+    "type": "java.lang.String",
+    "description": "A description for 'google.clientId'"
+  },
+  {
+    "name": "google.clientSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'google.clientSecret'"
+  },
+  {
+    "name": "google.accessTokenUri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.accessTokenUri'"
+  },
+  {
+    "name": "google.userAuthorizationUri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.userAuthorizationUri'"
+  },
+  {
+    "name": "google.redirectUri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.redirectUri'"
+  },
+  {
+    "name": "google.redirectUri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.redirectUri'"
+  },
+  {
+    "name": "google.clientId",
+    "type": "java.lang.String",
+    "description": "A description for 'google.clientId'"
+  }
+]}
